@@ -1,2 +1,2 @@
-# e-commerce_recom_system
+# UM AI Techniques Group 1 Assignment Project
 E-commerce Recommendation System
