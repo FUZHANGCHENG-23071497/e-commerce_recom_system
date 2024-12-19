@@ -12,4 +12,8 @@ This project can be deployed on platforms like Render. Follow the respective pla
 
 ### Reference
 - [Mastering Recommendation System: A Complete Guide](https://learnopencv.com/recommendation-system/)
-- 
+- [Deep Learning Recommendation Models (DLRM): A Deep Dive](https://medium.com/swlh/deep-learning-recommendation-models-dlrm-a-deep-dive-f38a95f47c2c)
+- [Practical Guide to Building Scalable Recommender Systems in Python](https://medium.com/@anilcogalan/practical-guide-to-building-scalable-recommender-systems-in-python-b175547e6fce)
+- [How to Build a Winning Recommendation System, Part 1](https://developer.nvidia.com/blog/how-to-build-a-winning-recommendation-system-part-1/)
+- [How to Build a Deep Learning Powered Recommender System, Part 2](https://developer.nvidia.com/blog/how-to-build-a-winning-recommendation-system-part-2-deep-learning-for-recommender-systems/)
+- [How to Build a Winning Deep Learning Recommender System (Youtube Video)](https://www.youtube.com/watch?v=bHuww-l_Sq0)
