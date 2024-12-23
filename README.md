@@ -6,7 +6,7 @@ Our group has developed an E-commerce Recommendation System using Python Dash. T
 Dataset: https://www.kaggle.com/datasets/imranalishahh/comprehensive-synthetic-e-commerce-dataset
 
 ### Deployment
-This project can be deployed on platforms like Render. Follow the respective platform’s guidelines for deployment. Ensure the following files are included:
+This project can be deployed on platforms like [Render](https://dashboard.render.com/). Follow the respective platform’s guidelines for deployment. Ensure the following files are included:
 - ```app.py```
 - ```requirements.txt```
 
