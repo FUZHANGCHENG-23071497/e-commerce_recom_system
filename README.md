@@ -11,6 +11,10 @@ This project can be deployed on platforms like [Render](https://dashboard.render
 - ```requirements.txt```
 
 ### Reference
+#### 1. App Deployment Tutorial
+- [Dash Python App Deployment Tutorial](https://www.youtube.com/watch?v=H16dZMYmvqo&t=142s)
+- [How to Deploy Your App to Streamlit Community Cloud](https://www.youtube.com/watch?v=HKoOBiAaHGg&t=427s)
+#### 2. Recommendation System
 - [Mastering Recommendation System: A Complete Guide](https://learnopencv.com/recommendation-system/)
 - [Deep Learning Recommendation Models (DLRM): A Deep Dive](https://medium.com/swlh/deep-learning-recommendation-models-dlrm-a-deep-dive-f38a95f47c2c)
 - [Practical Guide to Building Scalable Recommender Systems in Python](https://medium.com/@anilcogalan/practical-guide-to-building-scalable-recommender-systems-in-python-b175547e6fce)
