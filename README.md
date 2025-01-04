@@ -1,9 +1,11 @@
-# E-commerce Recommendation System
+# Movie Recommendation System
 
 ### Overview
-Our group has developed an E-commerce Recommendation System using Python Dash. This project demonstrates how machine learning principles and web development tools can be combined to create a user-friendly application for product recommendations.
+Our group has developed an Movie Recommendation System using Python Streamlit. This project demonstrates how machine learning principles and web development tools can be combined to create a user-friendly application for product recommendations.
 
-Dataset: https://www.kaggle.com/datasets/imranalishahh/comprehensive-synthetic-e-commerce-dataset
+Dataset: https://grouplens.org/datasets/movielens/
+
+Website Link: https://e-commercerecomsystem-hlm3dhcxb8thcblmtedmay.streamlit.app/
 
 ### Deployment
 This project can be deployed on platforms like [Render](https://dashboard.render.com/) and [Streamlit Community Cloud](https://streamlit.io/cloud). Follow the respective platform’s guidelines for deployment. Ensure the following files are included:
