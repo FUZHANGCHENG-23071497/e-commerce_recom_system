@@ -12,6 +12,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.utils.data import Dataset, DataLoader
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 # Define device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -324,9 +326,6 @@ def data_processing_unlabeled(df, wide_cols, embeddings_cols, continuous_cols, s
     }
 
 def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_cols, embeddings_cols, continuous_cols, k = 10, search_term = None):
-    # If a search term is provided, filter the movies
-    #if search_term:
-    #    movie_records = search_query(search_term, movie_records)
 
     # Preprocess movie_records data
     movies = movie_records.copy()
@@ -369,7 +368,7 @@ def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_co
     top_k_recommendations = pd.DataFrame({
         'movieId': unrated_movie_ids,
         'predicted_rating': predicted_ratings
-    }).sort_values(by='predicted_rating', ascending=False).head(k)
+    }).sort_values(by='predicted_rating', ascending=False)
 
     # Convert unrated_movies array into a DataFrame and Merge unrated_movies_df with movie_records to get the movie titles
     unrated_movies_df = pd.DataFrame(unrated_movies, columns=['movieId', 'genres', 'movie_year'])
@@ -378,31 +377,24 @@ def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_co
     # top movies with details
     top_movies_with_details = top_k_recommendations.merge(unrated_movies_df[['movieId', 'title', 'genres', 'movie_year']], 
                                                         on='movieId', how='left')
-
-    return top_movies_with_details
-
-def search_query(query, movie_records):
-    """
-    This function filters the movie records based on a search query.
-    The query is case-insensitive and can match substrings in the title or genres.
     
-    Args:
-    query (str): The search term to filter movies.
-    movie_records (DataFrame): The DataFrame containing movie data.
+    # If a search term is provided, filter the movies
+    if search_term:
+        top_movies_with_details = search_query(search_term, top_movies_with_details)
 
-    Returns:
-    filtered_movies (DataFrame): The DataFrame of movies that match the query.
-    """
-    # Normalize the query to lowercase for case-insensitive matching
-    query = query.lower()
+    return top_movies_with_details.head(k)
+
+# Function to filter based on title and genres
+def search_query(input_query, df):
+    input_query = input_query.lower()  # Make the input query lowercase to make it case-insensitive
+
+    print(df.columns)
     
-    # Filter by title and genre, if query matches any part of them
-    filtered_movies = movie_records[
-        movie_records['title'].str.lower().str.contains(query) |
-        movie_records['genres'].str.lower().str.contains(query)
-    ]
+    # Filter the rows where the title or genres contain the input_query
+    filtered_df = df[df['title'].str.contains(input_query, case=False, na=False) | 
+                     df['genres'].str.contains(input_query, case=False, na=False)]
     
-    return filtered_movies
+    return filtered_df
 
 def save_model(model, filepath):
     """
@@ -449,3 +441,25 @@ def load_model(model_class, model_args, filepath, device):
     model.to(device)
     print(f"Model loaded from {filepath}")
     return model
+
+# Function to generate and display word cloud
+def generate_wordcloud(text):
+    # Generate the word cloud with custom settings
+    wordcloud = WordCloud(
+        background_color='black',
+        max_words=200,
+        colormap='coolwarm',  # Creative color palette
+        contour_width=1,
+        contour_color='black',
+        random_state=42,
+        min_font_size=10,
+        max_font_size=200,
+        prefer_horizontal=0.5,  # Rotate words
+    ).generate(text)
+    
+    # Display the wordcloud using matplotlib
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+
+    return plt
