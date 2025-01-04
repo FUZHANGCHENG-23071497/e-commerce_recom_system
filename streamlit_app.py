@@ -144,14 +144,14 @@ with tabs[0]:
         st.table(recommended_movies[['title', 'genres', 'movie_year', 'predicted_rating']])
 
         # Combine all the text from the DataFrame into a single string
-        text = ' '.join(recommended_movies['genres'])
-        with st.container(border=True):
+        # text = ' '.join(recommended_movies['genres'])
+        #with st.container(border=True):
             # Add a button to enable/disable word cloud
-            if st.button('Generate Word Cloud'):
-                st.write("The word cloud is now visible!")
-                st.pyplot(utils.generate_wordcloud(text))
-            else:
-                st.write("Click the button above to generate the word cloud.")
+        #    if st.button('Generate Word Cloud'):
+        #        st.write("The word cloud is now visible!")
+        #        st.pyplot(utils.generate_wordcloud(text))
+        #    else:
+        #        st.write("Click the button above to generate the word cloud.")
     else:
         st.write("No recommendations available for this user with the search query.")
 
