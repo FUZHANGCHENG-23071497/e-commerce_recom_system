@@ -8,3 +8,4 @@ seaborn
 dash
 gunicorn
 altair<5
+wordcloud
