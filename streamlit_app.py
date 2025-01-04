@@ -3,35 +3,54 @@ import pandas as pd
 import numpy as np
 import torch, utils
 
-#Ratings
-ratings = pd.read_csv('ml-1m/ratings.dat', sep='::', header=None, encoding='latin-1', engine='python')
-ratings.columns = ['userId','movieId','rating','timestamp']
+@st.cache_data
+def load_ratings():
+    #Ratings
+    ratings = pd.read_csv('ml-1m/ratings.dat', sep='::', header=None, encoding='latin-1', engine='python')
+    ratings.columns = ['userId','movieId','rating','timestamp']
+    return ratings
 
 
-#Movies
-movies = pd.read_csv('ml-1m/movies.dat', sep='::', header=None, encoding='latin-1', engine='python')
-movies.columns = ['movieId','title','genres']
+@st.cache_data
+def load_movies():
+    #Movies
+    movies = pd.read_csv('ml-1m/movies.dat', sep='::', header=None, encoding='latin-1', engine='python')
+    movies.columns = ['movieId','title','genres']
+    return movies
 
-#Users
-users = pd.read_csv('ml-1m/users.dat', sep='::', header=None, encoding='latin-1',  engine='python')
-users.columns = ['userId','gender','age','occupation','zipCode']
+@st.cache_data
+def load_users():
+    #Users
+    users = pd.read_csv('ml-1m/users.dat', sep='::', header=None, encoding='latin-1',  engine='python')
+    users.columns = ['userId','gender','age','occupation','zipCode']
+    return users
 
-# movie preprocessing
-movie_records = movies.copy()
-movies['genres'] = movies.apply(lambda row : row['genres'].split("|")[0],axis=1)
-movies['movie_year'] = movies.apply(lambda row : int(row['title'].split("(")[-1][:-1]),axis=1)
-movies.drop(['title'],axis=1,inplace=True)
+ratings = load_ratings()
+movies = load_movies()
+users = load_users()
 
-# combine rating and movie
-rating_movie = pd.merge(ratings,movies,how='left',on="movieId")
 
-# user preprocessing
-users['gender'] = users['gender'].replace({'F':0,'M':1})
-users['age'] = users['age'].replace({1:0,18:1, 25:2, 35:3, 45:4, 50:5, 56:6 })
-users.drop(['zipCode'],axis=1,inplace=True)
+def preprocessed_data(ratings, users, movies):
+    # movie preprocessing
+    movie_records = movies.copy()
+    movies['genres'] = movies.apply(lambda row : row['genres'].split("|")[0],axis=1)
+    movies['movie_year'] = movies.apply(lambda row : int(row['title'].split("(")[-1][:-1]),axis=1)
+    movies.drop(['title'],axis=1,inplace=True)
 
-# combine into final dataframe
-final_df = pd.merge(rating_movie,users,how='left',on='userId')
+    # combine rating and movie
+    rating_movie = pd.merge(ratings,movies,how='left',on="movieId")
+
+    # user preprocessing
+    users['gender'] = users['gender'].replace({'F':0,'M':1})
+    users['age'] = users['age'].replace({1:0,18:1, 25:2, 35:3, 45:4, 50:5, 56:6 })
+    users.drop(['zipCode'],axis=1,inplace=True)
+
+    # combine into final dataframe
+    final_df = pd.merge(rating_movie,users,how='left',on='userId')
+
+    return final_df, movie_records
+
+final_df, movie_records = preprocessed_data(ratings, users, movies)
 
 #settings for the data
 wide_cols = ['movie_year','gender','age', 'occupation','genres','userId','movieId']
@@ -40,7 +59,12 @@ continuous_cols = ["movie_year","gender","age","occupation"]
 target = 'rating'
 
 #split the data and generate the embeddings
-data_processed = utils.data_processing(final_df, wide_cols, embeddings_cols, continuous_cols, target, scale=True)
+def data_process(final_df, wide_cols, embeddings_cols, continuous_cols, target):
+    data_processed = utils.data_processing(final_df, wide_cols, embeddings_cols, continuous_cols, target, scale=True)
+    return data_processed
+
+data_processed = data_process(final_df, wide_cols, embeddings_cols, continuous_cols, target)
+
 #setup for model arguments
 wide_dim = data_processed['train_dataset'].wide.shape[1]
 deep_column_idx = data_processed['deep_column_idx']
@@ -60,10 +84,15 @@ model_args = {
     'n_class': 1
 }
 
-loaded_model = utils.load_model(utils.NeuralNet, model_args, "./model/movie_recommendation_model.pth", utils.device)
-loaded_model.compile(optimizer='Adam')
+@st.cache_resource
+def load_models(model_args):
+    loaded_model = utils.load_model(utils.NeuralNet, model_args, "./model/movie_recommendation_model.pth", utils.device)
+    loaded_model.compile(optimizer='Adam')
+    return  loaded_model
 
-predict_user = 1000
+loaded_model = load_models(model_args)
+
+#predict_user = 1000
 
 #top_k_movies = utils.recommend_top_k_movies(predict_user, final_df, movie_records, loaded_model, wide_cols, embeddings_cols, continuous_cols, k = 10, search_term = None)
 
@@ -90,7 +119,7 @@ with tabs[0]:
     user_id = st.number_input("Enter User ID", min_value=1, max_value=final_df['userId'].max(), value=1)
 
     # Search feature: User can enter a query
-    # search_term = st.text_input("Search for Movies (Title or Genre)", "")
+    search_term = st.text_input("Search for Movies (Title or Genre)", "")
 
     # Get movie recommendations
     k = st.slider("Number of Recommendations", min_value=5, max_value=20, value=10)
@@ -103,13 +132,26 @@ with tabs[0]:
         embeddings_cols=embeddings_cols,
         continuous_cols=continuous_cols,
         k=k,
-        search_term=None
+        search_term=search_term
     )
 
     # Display Recommendations
     st.subheader(f"Top {k} Movie Recommendations for User {user_id}")
     if not recommended_movies.empty:
-        st.write(recommended_movies[['title', 'genres', 'movie_year', 'predicted_rating']])
+        # Add "No." column and set it as index
+        recommended_movies["No."] = range(1, len(recommended_movies) + 1)
+        recommended_movies = recommended_movies.set_index("No.")
+        st.table(recommended_movies[['title', 'genres', 'movie_year', 'predicted_rating']])
+
+        # Combine all the text from the DataFrame into a single string
+        text = ' '.join(recommended_movies['genres'])
+        with st.container(border=True):
+            # Add a button to enable/disable word cloud
+            if st.button('Generate Word Cloud'):
+                st.write("The word cloud is now visible!")
+                st.pyplot(utils.generate_wordcloud(text))
+            else:
+                st.write("Click the button above to generate the word cloud.")
     else:
         st.write("No recommendations available for this user with the search query.")
 
@@ -123,7 +165,7 @@ with tabs[1]:
 
     # Genre Distribution
     st.subheader("Genre Distribution")
-    genre_counts = movie_records['genres'].value_counts().head(10)
+    genre_counts = movie_records['genres'].value_counts()
     st.bar_chart(genre_counts)
 
     # Ratings Distribution
