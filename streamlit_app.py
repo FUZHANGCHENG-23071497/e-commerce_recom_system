@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import torch, utils
 
-@st.cache_data
+
 def load_ratings():
     #Ratings
     ratings = pd.read_csv('ml-1m/ratings.dat', sep='::', header=None, encoding='latin-1', engine='python')
@@ -11,14 +11,14 @@ def load_ratings():
     return ratings
 
 
-@st.cache_data
+
 def load_movies():
     #Movies
     movies = pd.read_csv('ml-1m/movies.dat', sep='::', header=None, encoding='latin-1', engine='python')
     movies.columns = ['movieId','title','genres']
     return movies
 
-@st.cache_data
+
 def load_users():
     #Users
     users = pd.read_csv('ml-1m/users.dat', sep='::', header=None, encoding='latin-1',  engine='python')
@@ -84,7 +84,7 @@ model_args = {
     'n_class': 1
 }
 
-@st.cache_resource
+
 def load_models(model_args):
     loaded_model = utils.load_model(utils.NeuralNet, model_args, "./model/movie_recommendation_model.pth", utils.device)
     loaded_model.compile(optimizer='Adam')
