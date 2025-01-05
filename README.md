@@ -7,6 +7,8 @@ Dataset: https://grouplens.org/datasets/movielens/
 
 Website Link: https://e-commercerecomsystem-hlm3dhcxb8thcblmtedmay.streamlit.app/
 
+---
+
 ### Deployment
 This project can be deployed on platforms like [Render](https://dashboard.render.com/) and [Streamlit Community Cloud](https://streamlit.io/cloud). Follow the respective platform’s guidelines for deployment. Ensure the following files are included:
 - ```app.py```
