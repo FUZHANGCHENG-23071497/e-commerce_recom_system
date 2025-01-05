@@ -26,7 +26,7 @@ pip install -r requirements.txt
 │   └── users.dat
 ├── model/
 │   └── movie_recommendation_model.pth
-├── app.py
+├── streamlit_app.py
 ├── utils.py
 ├── requirements.txt
 └── README.md
