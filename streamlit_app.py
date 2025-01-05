@@ -131,9 +131,8 @@ with tabs[0]:
         wide_cols=wide_cols,
         embeddings_cols=embeddings_cols,
         continuous_cols=continuous_cols,
-        k=k,
         search_term=search_term
-    )
+    ).head(k)
 
     # Display Recommendations
     st.subheader(f"Top {k} Movie Recommendations for User {user_id}")
