@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import torch, utils
 
-
+@st.cache_data
 def load_ratings():
     #Ratings
     ratings = pd.read_csv('ml-1m/ratings.dat', sep='::', header=None, encoding='latin-1', engine='python')
