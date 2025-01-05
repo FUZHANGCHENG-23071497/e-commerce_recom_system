@@ -216,15 +216,4 @@ with tabs[2]:
     - **Search Function**: Search movies by title or genre to explore and discover new options.
     - **Personalized Recommendations**: Top-k movie recommendations are dynamically generated based on predicted ratings specific to the user.
     - **Data Visualizations**: Visualize movie genre distributions, rating trends, and movie popularity to better understand the data.
-    
-    ## Installation and Configuration
-    
-    To run the Movie Recommendation System locally, follow the steps below:
-    
-    ### Prerequisites:
-    - Python 3.x or above
-    - Streamlit (for the app interface)
-    - Pandas, NumPy (for data processing)
-    - Scikit-learn (for machine learning models)
-    - Pytorch (for advanced recommendation algorithms like Wide & Deep)
     """)
