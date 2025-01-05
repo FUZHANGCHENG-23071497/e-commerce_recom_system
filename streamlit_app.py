@@ -4,7 +4,7 @@ import numpy as np
 import torch, utils
 
 st.set_page_config(
-    page_title="Movie Recommendation",
+    page_title="Movie Recommendation System",
     page_icon="🍿",
     layout="wide"
 )
