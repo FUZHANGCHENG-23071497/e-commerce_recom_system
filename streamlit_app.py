@@ -202,32 +202,17 @@ with tabs[1]:
 with tabs[2]:
     # Documentation Tab: Information about the system
     st.header("Documentation")
-    
     st.markdown("""
     ## Overview
-    The Movie Recommendation System is designed to provide personalized movie suggestions using collaborative filtering techniques. It leverages user interaction data and movie features to predict ratings for unrated movies and offer recommendations tailored to each user’s preferences.
+    The Movie Recommendation System uses collaborative filtering and personalized recommendations based on user behavior.
     
     ## How it Works
-    - **User Interaction**: The app tracks user behavior through ratings, movie preferences, and other interactions, which are then used to predict potential movie ratings.
-    - **Recommendation Model**: The system utilizes a collaborative filtering approach to predict user ratings for movies they have not rated. By applying these predictions, the system can recommend the top-k movies based on user-specific data.
-
-    ## Recommendation Algorithm
-    The Movie Recommendation System uses a **Wide & Deep** learning model for collaborative filtering.
-    - **Wide Model**: Captures interactions between features (e.g., user and movie ID) that may not have been seen in the training data. This model leverages cross-product features to model interactions, ensuring that new or rare combinations of features are still considered.
-    - **Deep Model**: Uses deep neural networks to capture complex patterns and relationships between the input features (e.g., genre, ratings, time of interaction). The deep model is excellent for identifying latent factors and understanding complex interactions between users and movies.
-    By combining these two models, the system can provide both general recommendations (wide model) and more personalized suggestions (deep model), improving the quality of recommendations over time.
-      
-    ## Features
-    - **User Input**: Users can input their unique ID and specify their preferences to receive personalized movie recommendations.
-    - **Search Function**: Search movies by title or genre to explore and discover new options.
-    - **Personalized Recommendations**: Top-k movie recommendations are dynamically generated based on predicted ratings specific to the user.
-    - **Data Visualizations**: Visualize movie genre distributions, rating trends, and movie popularity to better understand the data.
-
-    ### Key Improvements:
-    1. **Links**: Included links to the dataset and GitHub repository for users to access the necessary resources.
-    2. **Installation Instructions**: Provided step-by-step installation instructions to help users set up the app locally.
-    3. **Recommendation Algorithm**: Explained the Wide & Deep learning model used for recommendations, emphasizing its effectiveness in capturing both general and personalized patterns.
-    4. **System Performance**: Discussed performance metrics like accuracy and latency, which ensure that recommendations are both accurate and quick.
-    5. **User Interaction**: Highlighted how users can interact with the system, including registration, movie rating, and real-time feedback.
-    6. **Things to Note**: Added a section on data privacy, limitations, and system scalability to inform users of any potential issues. 
+    - **User Interaction**: The app uses historical user interactions (ratings) and movie data to recommend movies.
+    - **Model**: The model predicts ratings for unrated movies, and top-k recommendations are generated for each user.
+    
+    ## Features:
+    - **User Input**: Allows users to enter their ID and preferences.
+    - **Search Function**: Search movies by title or genre.
+    - **Personalized Recommendations**: Get top-k movie recommendations based on predicted ratings.
+    - **Data Visualizations**: Explore movie genre distributions, rating trends, and more.
     """)
