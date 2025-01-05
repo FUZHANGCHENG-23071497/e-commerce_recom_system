@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import torch, utils
 
+st.set_page_config(
+    page_title="Movie Recommendation",
+    page_icon="🍿",
+    layout="wide"
+)
+
 @st.cache_data
 def load_ratings():
     #Ratings
