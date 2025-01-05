@@ -325,7 +325,7 @@ def data_processing_unlabeled(df, wide_cols, embeddings_cols, continuous_cols, s
         'encoding_dict': encoding_dict
     }
 
-def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_cols, embeddings_cols, continuous_cols, k = 10, search_term = None):
+def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_cols, embeddings_cols, continuous_cols, search_term = None):
 
     # Preprocess movie_records data
     movies = movie_records.copy()
@@ -382,7 +382,7 @@ def recommend_top_k_movies(predict_user, final_df, movie_records, model, wide_co
     if search_term:
         top_movies_with_details = search_query(search_term, top_movies_with_details)
 
-    return top_movies_with_details.head(k)
+    return top_movies_with_details
 
 # Function to filter based on title and genres
 def search_query(input_query, df):
