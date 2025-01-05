@@ -13,6 +13,28 @@ Website Link: https://e-commercerecomsystem-hlm3dhcxb8thcblmtedmay.streamlit.app
 ```bash
 pip install streamlit  
 ```
+**Step 2: Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+**Step 3: Prepare the Dataset, Model and Python Script**
+```
+<your-repo-name>/
+├── ml-1m/
+│   ├── ratings.dat
+│   ├── movies.dat
+│   └── users.dat
+├── model/
+│   └── movie_recommendation_model.pth
+├── app.py
+├── utils.py
+├── requirements.txt
+└── README.md
+```
+**Step 4: Run the App**
+```bash
+streamlit run app.py
+```
 
 ### Deployment
 This project can be deployed on platforms like [Render](https://dashboard.render.com/) and [Streamlit Community Cloud](https://streamlit.io/cloud). Follow the respective platform’s guidelines for deployment. Ensure the following files are included:
