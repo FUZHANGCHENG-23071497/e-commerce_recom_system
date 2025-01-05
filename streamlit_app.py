@@ -47,7 +47,7 @@ def preprocessed_data(ratings, users, movies):
     rating_movie = pd.merge(ratings,movies,how='left',on="movieId")
 
     # user preprocessing
-    users['gender'] = users['gender'].replace({'F':0,'M':1})
+    users['gender'] = users['gender'].replace({'F':0,'M':1}).astype('int64')
     users['age'] = users['age'].replace({1:0,18:1, 25:2, 35:3, 45:4, 50:5, 56:6 })
     users.drop(['zipCode'],axis=1,inplace=True)
 
