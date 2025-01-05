@@ -227,3 +227,4 @@ with tabs[2]:
     - Pandas, NumPy (for data processing)
     - Scikit-learn (for machine learning models)
     - Pytorch (for advanced recommendation algorithms like Wide & Deep)
+    """)
