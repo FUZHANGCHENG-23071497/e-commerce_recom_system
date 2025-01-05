@@ -160,7 +160,9 @@ with tabs[0]:
                         ),
                         "comments": "Comments",
                     },
-                    disabled=["title", "genres", "movie_year"])
+                    disabled=["title", "genres", "movie_year"],
+                    use_container_width = True
+                )
 
         # Combine all the text from the DataFrame into a single string
         text = ' '.join(recommended_movies['genres'])
