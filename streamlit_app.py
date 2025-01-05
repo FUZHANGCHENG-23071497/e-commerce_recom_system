@@ -202,17 +202,28 @@ with tabs[1]:
 with tabs[2]:
     # Documentation Tab: Information about the system
     st.header("Documentation")
+    
     st.markdown("""
     ## Overview
-    The Movie Recommendation System uses collaborative filtering and personalized recommendations based on user behavior.
+    The Movie Recommendation System is designed to provide personalized movie suggestions using collaborative filtering techniques. It leverages user interaction data and movie features to predict ratings for unrated movies and offer recommendations tailored to each user’s preferences.
     
     ## How it Works
-    - **User Interaction**: The app uses historical user interactions (ratings) and movie data to recommend movies.
-    - **Model**: The model predicts ratings for unrated movies, and top-k recommendations are generated for each user.
+    - **User Interaction**: The app tracks user behavior through ratings, movie preferences, and other interactions, which are then used to predict potential movie ratings.
+    - **Recommendation Model**: The system utilizes a collaborative filtering approach to predict user ratings for movies they have not rated. By applying these predictions, the system can recommend the top-k movies based on user-specific data.
+      
+    ## Features
+    - **User Input**: Users can input their unique ID and specify their preferences to receive personalized movie recommendations.
+    - **Search Function**: Search movies by title or genre to explore and discover new options.
+    - **Personalized Recommendations**: Top-k movie recommendations are dynamically generated based on predicted ratings specific to the user.
+    - **Data Visualizations**: Visualize movie genre distributions, rating trends, and movie popularity to better understand the data.
     
-    ## Features:
-    - **User Input**: Allows users to enter their ID and preferences.
-    - **Search Function**: Search movies by title or genre.
-    - **Personalized Recommendations**: Get top-k movie recommendations based on predicted ratings.
-    - **Data Visualizations**: Explore movie genre distributions, rating trends, and more.
-    """)
+    ## Installation and Configuration
+    
+    To run the Movie Recommendation System locally, follow the steps below:
+    
+    ### Prerequisites:
+    - Python 3.x or above
+    - Streamlit (for the app interface)
+    - Pandas, NumPy (for data processing)
+    - Scikit-learn (for machine learning models)
+    - Pytorch (for advanced recommendation algorithms like Wide & Deep)
