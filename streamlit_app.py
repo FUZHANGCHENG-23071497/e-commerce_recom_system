@@ -100,12 +100,6 @@ loaded_model = load_models(model_args)
 
 
 # Streamlit UI Setup
-st.set_page_config(
-    page_title="Movie Recommendation System",
-    page_icon="🍿",
-    layout="wide"
-)
-
 st.title("Movie Recommendation System")
 
 # Streamlit Tabs
