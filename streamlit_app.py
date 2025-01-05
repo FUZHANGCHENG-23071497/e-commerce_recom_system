@@ -205,6 +205,8 @@ with tabs[2]:
     st.markdown("""
     ## Overview
     The Movie Recommendation System uses collaborative filtering and personalized recommendations based on user behavior.
+
+    **Github Link**: https://github.com/FUZHANGCHENG-23071497/e-commerce_recom_system/tree/main
     
     ## How it Works
     - **User Interaction**: The app uses historical user interactions (ratings) and movie data to recommend movies.
