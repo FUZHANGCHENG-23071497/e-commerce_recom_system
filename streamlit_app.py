@@ -228,4 +228,46 @@ with tabs[2]:
     - **Search Function**: Search movies by title or genre.
     - **Personalized Recommendations**: Get top-k movie recommendations based on predicted ratings.
     - **Data Visualizations**: Explore movie genre distributions, rating trends, and more.
+
+    ## Feedback
+    We value your feedback to improve our system! Please share your thoughts and suggestions.
+    """)
+
+    # Add a user feedback form
+    st.subheader("Share Your Feedback")
+    st.markdown("We'd love to hear from you! Please let us know your thoughts, suggestions, or any issues you've encountered.")
+    
+    # Create feedback form inputs
+    user_name = st.text_input("Name (optional):")
+    user_email = st.text_input("Email (optional):")
+    feedback = st.text_area("Your Feedback:")
+    
+    # Submit button
+    if st.button("Submit Feedback"):
+        if feedback:
+            st.success("Thank you for your feedback!")
+            # Here you can integrate code to save feedback to a database or send it via email
+        else:
+            st.error("Feedback cannot be empty. Please share your thoughts.")
+    
+    # FAQ Section
+    st.subheader("Frequently Asked Questions (FAQ)")
+    st.markdown("""
+    **1. How does the system recommend movies?**  
+    The system uses a combination of collaborative filtering and the Wide & Deep model to predict user preferences and generate recommendations based on past interactions and movie features.
+    
+    **2. What kind of data does the system use?**  
+    The system uses user ratings, movie metadata (e.g., genres, release year), and interaction history to train the model.
+    
+    **3. Can I search for specific movies?**  
+    Yes! Use the search function to look for movies by title or genre.
+    
+    **4. How are my preferences updated?**  
+    The system learns from your interactions (e.g., ratings, searches) and adjusts recommendations dynamically over time.
+    
+    **5. Is my feedback anonymous?**  
+    Yes, unless you choose to provide your name or email in the feedback form, your feedback is anonymous.
+    
+    **6. Can I request new features or report issues?**  
+    Absolutely! Use the feedback form above to share your suggestions or report any issues you've encountered.
     """)
