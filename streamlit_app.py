@@ -209,6 +209,12 @@ with tabs[2]:
     ## How it Works
     - **User Interaction**: The app uses historical user interactions (ratings) and movie data to recommend movies.
     - **Model**: The model predicts ratings for unrated movies, and top-k recommendations are generated for each user.
+
+    ## Recommendation Algorithm
+    The Movie Recommendation System uses a **Wide & Deep** learning model for collaborative filtering.
+    - **Wide Model**: Captures interactions between features (e.g., user and movie ID) that may not have been seen in the training data. This model leverages cross-product features to model interactions, ensuring that new or rare combinations of features are still considered.
+    - **Deep Model**: Uses deep neural networks to capture complex patterns and relationships between the input features (e.g., genre, ratings, time of interaction). The deep model is excellent for identifying latent factors and understanding complex interactions between users and movies.
+    By combining these two models, the system can provide both general recommendations (wide model) and more personalized suggestions (deep model), improving the quality of recommendations over time.
     
     ## Features:
     - **User Input**: Allows users to enter their ID and preferences.
