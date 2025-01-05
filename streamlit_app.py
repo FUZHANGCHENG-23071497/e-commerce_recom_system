@@ -216,4 +216,12 @@ with tabs[2]:
     - **Search Function**: Search movies by title or genre to explore and discover new options.
     - **Personalized Recommendations**: Top-k movie recommendations are dynamically generated based on predicted ratings specific to the user.
     - **Data Visualizations**: Visualize movie genre distributions, rating trends, and movie popularity to better understand the data.
+
+    ### Key Improvements:
+    1. **Links**: Included links to the dataset and GitHub repository for users to access the necessary resources.
+    2. **Installation Instructions**: Provided step-by-step installation instructions to help users set up the app locally.
+    3. **Recommendation Algorithm**: Explained the Wide & Deep learning model used for recommendations, emphasizing its effectiveness in capturing both general and personalized patterns.
+    4. **System Performance**: Discussed performance metrics like accuracy and latency, which ensure that recommendations are both accurate and quick.
+    5. **User Interaction**: Highlighted how users can interact with the system, including registration, movie rating, and real-time feedback.
+    6. **Things to Note**: Added a section on data privacy, limitations, and system scalability to inform users of any potential issues. 
     """)
