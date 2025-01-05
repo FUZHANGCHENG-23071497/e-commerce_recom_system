@@ -141,7 +141,21 @@ with tabs[0]:
         # Add "No." column and set it as index
         recommended_movies["No."] = range(1, len(recommended_movies) + 1)
         recommended_movies = recommended_movies.set_index("No.")
-        st.data_editor(recommended_movies[['title', 'genres', 'movie_year']])
+        recommended_movies["rating"] = 0
+        recommended_movies["comments"] = ""
+        st.data_editor(recommended_movies[['title', 'genres', 'movie_year', 'rating', 'comments']],
+                      column_config={
+                        "rating": st.column_config.NumberColumn(
+                            "Your rating",
+                            help="How much do you like this movie (1-5)?",
+                            min_value=1,
+                            max_value=5,
+                            step=1,
+                            format="%d ⭐",
+                        ),
+                        "comments": "Comments",
+                    },
+                    disabled=["title", "genres", "movie_year"])
 
         # Combine all the text from the DataFrame into a single string
         text = ' '.join(recommended_movies['genres'])
