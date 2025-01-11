@@ -426,7 +426,7 @@ def load_model(model_class, model_args, filepath, device):
         An instance of the model with the loaded state and additional data.
     """
     # Load the checkpoint
-    checkpoint = torch.load(filepath, map_location=device)
+    checkpoint = torch.load(filepath, map_location=device, weights_only=True)
     
     # Initialize the model
     model = model_class(**model_args)
